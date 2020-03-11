@@ -1,0 +1,33 @@
+<% @page_title = "支出科目一覧" %>
+<h2><%= @page_title %></h2>
+
+<p><%= link_to "トップに戻る", root_path %></p>
+<%= link_to "支出科目の新規登録", :new_expense %>
+
+<% if @expenses.present? %>
+<table>
+	<thead>
+		<tr>
+			<th>科目名</th>
+			<th>備考</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @expenses.each do |expense| %>
+			<tr>
+				<td><%= expense.name %></td>
+				<td><%= expense.description %></td>
+				<td>
+				<%= link_to "編集", [:edit, expense] %>
+				<%= link_to "削除", expense, method: :delete,
+					data: { confirm: "本当に削除しますか？"} %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<% else %>
+	<p>登録されている支出科目がありません。</p>
+<% end %>
