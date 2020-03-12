@@ -1,0 +1,73 @@
+<h2><%= @year_month %> 月次収支確認</h2>
+
+<h3>収入</h3>
+<% if @income_values.present? %>
+<table>
+	<thead>
+		<tr>
+			<th>科目名</th>
+			<th>値</th>
+			<th>備考</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @income_values.each do |income_value| %>
+			<tr>
+				<td><%= @incomes.find(income_value.income_id).name %></td>
+				<td style="text-align: right"><%= income_value.value %>円</td>
+				<td><%= income_value.description %></td>
+			</tr>
+		<% end %>
+		<tr>
+			<td><b>収入合計</b></td>
+			<td style="text-align: right"><b><%= @income_value_total %>円</b></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<% else %>
+	<p>登録されている収入がありません。</p>
+<% end %>
+
+<h3>支出</h3>
+<% if @expense_values.present? %>
+<table>
+	<thead>
+		<tr>
+			<th>科目名</th>
+			<th>値</th>
+			<th>備考</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @expense_values.each do |expense_value| %>
+			<tr>
+				<td><%= @expenses.find(expense_value.expense_id).name %></td>
+				<td style="text-align: right"><%= expense_value.value %>円</td>
+				<td><%= expense_value.description %></td>
+			</tr>
+		<% end %>
+		<tr>
+			<td><b>支出合計</b></td>
+			<td style="text-align: right"><b><%= @expense_value_total %>円</b></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<% else %>
+	<p>登録されている支出がありません。</p>
+<% end %>
+
+<h3>収支結果</h3>
+
+<table>
+  <tbody>
+  <tr>
+    <td><b>収支差</b></td>
+    <td style="text-align: right"><b><%= @balance_difference %>円</b></td>
+  </tr>
+  </tbody>
+</table>
+<b>収支差：<%= @balance_difference %> 円</b>
