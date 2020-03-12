@@ -62,7 +62,7 @@ class BalanceConfirmController < ApplicationController
 		#年度の収支結果を計算
 		@balance_differences = [nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil]
 		0.upto(11) do |i|
-			if @income_value_totals[i].present?
+			if @income_value_totals[i].present? && @expense_value_totals[i].present?
 				@balance_differences[i] = @income_value_totals[i] - @expense_value_totals[i]
 			end
 		end
